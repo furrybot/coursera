@@ -11,7 +11,11 @@ def read_file_data(path):
 
 
 def update_model(data, args):
-    data[args.key] = args.value
+    if data.get(args.key, False):
+        data[args.key].append(args.value)
+    else:
+        data[args.key] = [args.value]
+
     return json.dumps(data)
 
 

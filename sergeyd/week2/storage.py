@@ -32,6 +32,11 @@ def storage_write(f, data):
     print(f.read())
 
 
+def get_value(data, key):
+    value = data.get(key, 'None')
+    return ", ".join(value) if isinstance(value, list) else value
+
+
 cmd_args = args_parse()
 model = read_file_data(storage_path)
 
@@ -40,7 +45,6 @@ if cmd_args.value:
         model = update_model(model, cmd_args)
         storage_write(file, model)
 else:
-
-    print(model.get(cmd_args.key, 'None'))
+    print(get_value(model, cmd_args.key))
 
 
